@@ -31,15 +31,13 @@ add_custom_target(
 
 # Get SFML and box2d libraries
 find_package(OpenGL REQUIRED)
-# TODO: use the line with "main" in it if you don't want the console
-find_package(SFML COMPONENTS system window graphics CONFIG REQUIRED)
-# find_package(SFML COMPONENTS system window graphics main CONFIG REQUIRED)
+find_package(SFML COMPONENTS system window graphics main CONFIG REQUIRED)
 find_package(box2d CONFIG REQUIRED)
 include_directories(include/)
 
 # Add source to this project's executable.  
-# add_executable (${EXECUTABLE_CUSTOM_NAME} "main.cpp"  "code.cpp")
 file(GLOB_RECURSE PROJECT_SRC src/*.cpp include/*.h)
+
 # TODO: use the line with "win32" in it if you don't want the console
 add_executable(${EXECUTABLE_CUSTOM_NAME} ${PROJECT_SRC})
 # add_executable(${EXECUTABLE_CUSTOM_NAME} win32 ${PROJECT_SRC})
@@ -48,9 +46,7 @@ add_executable(${EXECUTABLE_CUSTOM_NAME} ${PROJECT_SRC})
 add_dependencies(${EXECUTABLE_CUSTOM_NAME} DataTarget-${EXECUTABLE_CUSTOM_NAME})
 
 # Link libraries
-# TODO: use the line with "sfml-main" in it if you don't want the console
-target_link_libraries(${EXECUTABLE_CUSTOM_NAME} PRIVATE sfml-graphics sfml-audio sfml-window sfml-system)
-#target_link_libraries(${EXECUTABLE_CUSTOM_NAME} PRIVATE sfml-main sfml-graphics sfml-audio sfml-window sfml-system)
+target_link_libraries(${EXECUTABLE_CUSTOM_NAME} PRIVATE sfml-main sfml-graphics sfml-audio sfml-window sfml-system)
 
 if(MSVC)
 target_link_libraries(${EXECUTABLE_CUSTOM_NAME} PRIVATE sfml-main FLAC OpenAL OpenGL Vorbis)
